@@ -1,0 +1,34 @@
+
+backend:
+  name: git-gateway
+  branch: main
+
+media_folder: "assets/uploads"
+public_folder: "/assets/uploads"
+
+publish_mode: editorial_workflow
+
+collections:
+  - name: "blog"
+    label: "المقالات"
+    folder: "content/blog"
+    create: true
+    format: "json"
+    extension: "json"
+    fields:
+      - {label: "العنوان", name: "title", widget: "string"}
+      - {label: "ملخص", name: "excerpt", widget: "text", required: false}
+      - {label: "الرابط (URL) للمقال", name: "url", widget: "string"}
+
+  - name: "reports"
+    label: "التقارير"
+    folder: "content/reports"
+    create: true
+    format: "json"
+    extension: "json"
+    fields:
+      - {label: "العنوان", name: "title", widget: "string"}
+      - {label: "الوصف", name: "description", widget: "text", required: false}
+      - {label: "ملف التقرير", name: "file", widget: "file"}
+      - {label: "محمي بكلمة مرور؟", name: "protected", widget: "boolean", default: false}
+      - {label: "كلمة المرور (واجهة فقط، ليست آمنة للاستخدام الحساس)", name: "password", widget: "string", required: false}

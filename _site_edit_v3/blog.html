@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>المقالات - منتدى مستقبل حضرموت</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a class="brand" href="index.html">
+          <img class="brand-logo" src="assets/logo.jpg" alt="Hadhramout Future Forum">
+          <div class="logo-text">
+            <h1>منتدى مستقبل حضرموت</h1>
+            <p>Hadhramout Future Forum</p>
+          </div>
+        </a>
+        <nav>
+          <ul>
+            <li><a href="vision.html">الرؤية</a></li>
+            <li><a href="goals.html">الأهداف</a></li>
+            <li><a href="approach.html">آليات العمل</a></li>
+            <li><a href="philosophy.html">فلسفة الشعار</a></li>
+            <li><a href="contact.html">تواصل معنا</a></li>
+            <li><a href="blog.html">المقالات</a></li>
+            <li><a href="reports.html">التقارير</a></li>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </header>
+
+  <main class="page">
+    <div class="container">
+      <div class="section-title"><h2>المقالات</h2></div>
+      <div id="blog-list" class="cards-container"></div>
+      <p style="margin-top:16px;color:#4a5568;">لإدارة المقالات عبر لوحة تحكم، استخدم صفحة <code>/admin</code> بعد ربط الموقع بمستودع Git (Netlify CMS).</p>
+    </div>
+  </main>
+
+  <footer>
+    <div class="container">
+      <div class="copyright"><p>جميع الحقوق محفوظة &copy; 2025 منتدى مستقبل حضرموت</p></div>
+    </div>
+  </footer>
+  <script src="js/script.js"></script>
+  <script>
+  fetch('content/blog/posts.json').then(r=>r.json()).then(items=>{
+    const wrap = document.getElementById('blog-list');
+    if(!Array.isArray(items) || items.length===0){ wrap.innerHTML = '<p>لا توجد مقالات حالياً.</p>'; return; }
+    wrap.innerHTML = items.map(p => `
+      <article class="card">
+        <h3 style="margin-bottom:8px;">${p.title}</h3>
+        <p style="margin-bottom:10px;">${p.excerpt||''}</p>
+        <a class="btn" href="${p.url}" target="_blank" rel="noopener">اقرأ المزيد</a>
+      </article>
+    `).join('');
+  }).catch(()=>{ document.getElementById('blog-list').innerHTML='<p>لا توجد مقالات حالياً.</p>'; });
+  </script>
+</body>
+</html>
